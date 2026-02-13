@@ -3,18 +3,26 @@ from django.db.models import Q
 from .models import Item
 
 
-def home(request):
-    status = request.GET.get('status')
-    query = request.GET.get('q')  # Получаем поисковый запрос
+def home(request, status=None):
+    query = request.GET.get('q')
 
     items = Item.objects.all().order_by('-created_at')
 
+    # если статус пришёл из URL — используем его
     if status:
         items = items.filter(status=status)
+    else:
+        # если нет — проверяем GET параметр
+        get_status = request.GET.get('status')
+        if get_status:
+            items = items.filter(status=get_status)
+            status = get_status
 
     if query:
-        # Ищем по названию ИЛИ описанию
-        items = items.filter(Q(title__icontains=query) | Q(description__icontains=query))
+        items = items.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query)
+        )
 
     return render(request, 'core/home.html', {
         'items': items,
@@ -29,14 +37,13 @@ def item_detail(request, item_id):
 
 def add_item(request):
     if request.method == 'POST':
-        # Сохраняем вещь с картинкой
         Item.objects.create(
             title=request.POST['title'],
             description=request.POST['description'],
             status=request.POST['status'],
             location=request.POST['location'],
             contact_info=request.POST['contact_info'],
-            image=request.FILES.get('image')  # <--- ВОТ ЭТО ВАЖНО
+            image=request.FILES.get('image'),
         )
         return redirect('home')
 

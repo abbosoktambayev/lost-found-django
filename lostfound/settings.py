@@ -127,6 +127,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+# 🔥 ВОТ ЭТА ВАЖНАЯ СТРОКА, КОТОРУЮ МЫ ДОБАВИЛИ:
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 # Media files (Uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

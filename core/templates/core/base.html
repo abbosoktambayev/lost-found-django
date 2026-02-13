@@ -14,9 +14,11 @@
             <h1 class="logo">Lost &amp; Found Portal</h1>
 
             <nav class="nav-links">
-                <a href="/static">Home</a>
-                <a href="/static?status=lost">Lost Items</a>
-                <a href="/static?status=found">Found Items</a>
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'home' %}?status=lost">Lost Items</a>
+                <a href="{% url 'home' %}?status=found">Found Items</a>
+                <a href="{% url 'home' %}?status=returned">Returned Items</a>
+
                 <a href="/admin/">Admin</a>
             </nav>
         </div>
