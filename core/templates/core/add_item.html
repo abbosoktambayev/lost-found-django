@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+{% block title %}Report Item{% endblock %}
+
+{% block content %}
+<h2>Report Item</h2>
+<p class="page-subtitle">
+    Submit details about a lost, found, or returned item
+</p>
+
+<form method="post" class="form-card" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label>Title</label>
+    <input type="text" name="title" required placeholder="Ex: Black iPhone 14">
+
+    <label>Description</label>
+    <textarea name="description" required placeholder="Describe the item..."></textarea>
+
+    <label>Status</label>
+    <select name="status" required>
+        <option value="lost">Lost</option>
+        <option value="found">Found</option>
+        <option value="returned">Returned</option>
+    </select>
+
+    <label>Location</label>
+    <input type="text" name="location" required placeholder="Ex: Library, Room 204">
+
+    <label>Contact Info</label>
+    <input type="text" name="contact_info" required placeholder="Phone or Telegram username">
+
+    <label>Photo (Optional)</label>
+    <input type="file" name="image" accept="image/*">
+
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Lost & Found{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="nav-container">
+        <div class="nav-left">
+            <h1 class="logo">Lost &amp; Found Portal</h1>
+
+            <nav class="nav-links">
+                <a href="/static">Home</a>
+                <a href="/static?status=lost">Lost Items</a>
+                <a href="/static?status=found">Found Items</a>
+                <a href="/admin/">Admin</a>
+            </nav>
+        </div>
+
+        <div class="nav-right">
+            <a href="{% url 'add_item' %}" class="btn-primary">
+                Report Item
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <span>© 2026 Lost &amp; Found Portal</span>
+        <span>University Project · Django</span>
+    </div>
+</footer>
+
+</body>
+</html>
